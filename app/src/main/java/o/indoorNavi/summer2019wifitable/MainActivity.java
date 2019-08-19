@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,43 +44,56 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button buttonAP1 = findViewById(R.id.buttonAP1);
-
+        final Button buttonAP1 = findViewById(R.id.buttonAP1);
+        final Button buttonAP2 = findViewById(R.id.buttonAP2);
 
         wManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-
-        final String ITEM_KEY = "key";
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                int frequency1 = -99;
-                int frequency2 = -100;
+
                 ArrayList<String> closeBSSID = new ArrayList<String>();
 
                 registerReceiver(receiverScanner, new IntentFilter((WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))); // display list
 
                 wManager.startScan();
+
+                HashMap<String, Integer> item = new HashMap<String, Integer>();
+
                 Toast.makeText(MainActivity.this, "Scanning...." + size, Toast.LENGTH_SHORT).show();
                 try
                 {
                     int counter = 0;
-                    Log.d("Winfo", String.valueOf(size));while (counter < size) {
+                    Log.d("Winfo", String.valueOf(size));
+
+                    while (counter < size) {
 //                        Log.d("Winfo", list.get(counter).SSID + " " + list.get(counter).BSSID + list.get(counter).level);
                     //frequency1 = list.get(counter).level;
-                    HashMap<String, String> item = new HashMap<String, String>();
-                    if (list.get(counter).SSID.equals("ubcvisitor")) {
+                        String BSSID = list.get(counter).BSSID;
+                        Integer RSSI = list.get(counter).level;
 
-                        item.put(ITEM_KEY, list.get(counter).SSID + "  " + list.get(counter).BSSID + " " + list.get(counter).level);
+                    if (list.get(counter).SSID.equals("ubcvisitor") && (RSSI > -60)) {
 
-                        Log.d("Winfo",list.get(counter).SSID + "  " + list.get(counter).BSSID + " " + list.get(counter).level);
+//                        if(item.containsKey(BSSID)) {
+//                            Queue q = (Queue) item.get(BSSID).element();
+//                            q.add(RSSI);
+//                            item.put(BSSID, q);
+//                        }else{
+                            item.put(BSSID, RSSI);
+
+//                        }
+
+                        Log.d("Winfo",BSSID + " " + RSSI);
 
                     }
                     counter++;
                 }
 
-
+                    if(item.containsKey("84:b8:02:bf:71:04")){
+                        buttonAP1.setText("FIP139");
+                    }
 
                     //Log.d("BSSID",BSSID);
                     //Log.d("BSSID", String.valueOf(MVS.getSectionFromBSSID(BSSID)));
