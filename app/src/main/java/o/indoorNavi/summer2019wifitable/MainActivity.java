@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final Button buttonAP1 = findViewById(R.id.buttonAP1);
+        final Button buttonAP2 = findViewById(R.id.buttonAP2);
 
         wManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> closeBSSID = new ArrayList<String>();
 
                 registerReceiver(receiverScanner, new IntentFilter((WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))); // display list
-                
+
                 wManager.startScan();
 
                 HashMap<String, Integer> item = new HashMap<String, Integer>();
