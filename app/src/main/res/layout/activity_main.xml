@@ -20,7 +20,8 @@
 
         <TableRow
             android:id="@+id/tableRowAP1"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView"
@@ -38,7 +39,7 @@
         <TableRow
             android:id="@+id/tableRowAP2"
             android:layout_width="match_parent"
-            android:layout_height="10vh" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView2"
@@ -56,7 +57,7 @@
         <TableRow
             android:id="@+id/tableRowAP3"
             android:layout_width="match_parent"
-            android:layout_height="10vh" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView3"

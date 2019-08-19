@@ -73,20 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
                         item.put(ITEM_KEY, list.get(counter).SSID + "  " + list.get(counter).BSSID + " " + list.get(counter).level);
 
-                        if (frequency1 < list.get(counter).level){
-                            frequency1 = list.get(counter).level;
-                            closeBSSID.add(list.get(counter).BSSID);
-                        }
-                        else if (frequency1 >= frequency2 && frequency2 < list.get(counter).level ){
-                            frequency2 = list.get(counter).level;
-                            closeBSSID.add(list.get(counter).BSSID);
-                        }
-
-                        Log.d("Winfo", String.valueOf(frequency1) + frequency2 + " " + closeBSSID);
+                        Log.d("Winfo",list.get(counter).SSID + "  " + list.get(counter).BSSID + " " + list.get(counter).level);
 
                     }
                     counter++;
                 }
+
+
 
                     //Log.d("BSSID",BSSID);
                     //Log.d("BSSID", String.valueOf(MVS.getSectionFromBSSID(BSSID)));
